@@ -4,6 +4,8 @@ import cifar10.models.vgg as vgg
 import cifar10.models.resnet as resnet
 import cifar10.models.densenet as densenet
 
+import cifar10.models.darts as darts
+
 # map between model name and function
 models = {
     'vgg9'                  : vgg.VGG9,
@@ -35,6 +37,17 @@ models = {
     'wrn56_8_noshort'       : resnet.WRN56_8_noshort,
     'wrn110_2_noshort'      : resnet.WRN110_2_noshort,
     'wrn110_4_noshort'      : resnet.WRN110_4_noshort,
+    'darts_v1'              : darts.darts_v1,
+    'darts_v2'              : darts.darts_v2,
+    'darts_ops1'            : darts.darts_ops1,
+    'darts_ops2'            : darts.darts_ops2,
+    'darts_ops3'            : darts.darts_ops3,
+    'darts_ops4'            : darts.darts_ops4,
+    'darts_ops5'            : darts.darts_ops5,
+    'darts_conn1'            : darts.darts_conn1,
+    'darts_conn2'            : darts.darts_conn2,
+    'darts_conn3'            : darts.darts_conn3,
+    'darts_conn4'            : darts.darts_conn4,
 }
 
 def load(model_name, model_file=None, data_parallel=False):

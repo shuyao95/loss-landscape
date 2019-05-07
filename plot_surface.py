@@ -212,6 +212,7 @@ if __name__ == '__main__':
     #--------------------------------------------------------------------------
     if args.mpi:
         comm = mpi.setup_MPI()
+
         rank, nproc = comm.Get_rank(), comm.Get_size()
     else:
         comm, rank, nproc = None, 0, 1
