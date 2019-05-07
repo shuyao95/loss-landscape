@@ -180,6 +180,8 @@ if __name__ == '__main__':
     parser.add_argument('--model_file2', default='', help='use (model_file2 - model_file) as the xdirection')
     parser.add_argument('--model_file3', default='', help='use (model_file3 - model_file) as the ydirection')
     parser.add_argument('--loss_name', '-l', default='crossentropy', help='loss functions: crossentropy | mse')
+    parser.add_argument('--auxiliary', action='store_true', default=False,
+                        help='has auxiliary tower or not')
 
     # direction parameters
     parser.add_argument('--dir_file', default='', help='specify the name of direction file, or the path to an eisting direction file')
@@ -242,7 +244,7 @@ if __name__ == '__main__':
     #--------------------------------------------------------------------------
     # Load models and extract parameters
     #--------------------------------------------------------------------------
-    net = model_loader.load(args.dataset, args.model, args.model_file)
+    net = model_loader.load(args.dataset, args.model, args.model_file, args.auxiliary)
     w = net_plotter.get_weights(net) # initial parameters
     s = copy.deepcopy(net.state_dict()) # deepcopy since state_dict are references
     if args.ngpu > 1:

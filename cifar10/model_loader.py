@@ -50,8 +50,11 @@ models = {
     'darts_conn4'            : darts.darts_conn4,
 }
 
-def load(model_name, model_file=None, data_parallel=False):
-    net = models[model_name]()
+def load(model_name, model_file=None, data_parallel=False, auxiliary=False):
+    if 'darts' in model_name:
+        net = models[model_name](auxiliary)
+    else:
+        net = models[model_name]()
     if data_parallel: # the model is saved in data paralle mode
         net = torch.nn.DataParallel(net)
 

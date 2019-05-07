@@ -332,35 +332,35 @@ DARTS_CONN4 = Genotype(
 	reduce_concat=[2, 3, 4, 5])
 
 
-def darts_v2():
-	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=True, genotype=DARTS_V2)
+def darts_v2(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=DARTS_V2)
 
-def darts_v1():
-	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=True, genotype=DARTS_V1)
+def darts_v1(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=DARTS_V1)
 
-def darts_ops1():
-	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=True, genotype=DARTS_OPS1)
+def darts_ops1(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=DARTS_OPS1)
 
-def darts_ops2():
-	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=True, genotype=DARTS_OPS2)
+def darts_ops2(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=DARTS_OPS2)
 
-def darts_ops3():
-	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=True, genotype=DARTS_OPS3)
+def darts_ops3(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=DARTS_OPS3)
 
-def darts_ops4():
-	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=True, genotype=DARTS_OPS4)
+def darts_ops4(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=DARTS_OPS4)
 
-def darts_ops5():
-	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=True, genotype=DARTS_OPS5)
+def darts_ops5(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=DARTS_OPS5)
 
-def darts_conn1():
-	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=True, genotype=DARTS_CONN1)
+def darts_conn1(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=DARTS_CONN1)
 
-def darts_conn2():
-	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=True, genotype=DARTS_CONN2)
+def darts_conn2(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=DARTS_CONN2)
 
-def darts_conn3():
-	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=True, genotype=DARTS_CONN3)
+def darts_conn3(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=DARTS_CONN3)
 
-def darts_conn4():
-	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=True, genotype=DARTS_CONN4)
+def darts_conn4(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=DARTS_CONN4)
