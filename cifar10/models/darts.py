@@ -240,7 +240,7 @@ class NetworkCIFAR(nn.Module):
 		logits_aux = None
 		s0 = s1 = self.stem(input)
 		for i, cell in enumerate(self.cells):
-			s0, s1 = s1, cell(s0, s1, self.drop_path_prob)
+			s0, s1 = s1, cell(s0, s1, drop_prob=0)
 			if i == 2 * self._layers // 3:
 				if self._auxiliary and self.training:
 					logits_aux = self.auxiliary_head(s1)
