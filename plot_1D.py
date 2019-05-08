@@ -18,7 +18,10 @@ def plot_1d_loss_err(surf_file, xmin=-1.0, xmax=1.0, loss_max=5, log=False, show
     assert 'train_loss' in f.keys(), "'train_loss' does not exist"
     train_loss = f['train_loss'][:]
     train_acc = f['train_acc'][:]
-    print(type(train_acc), train_acc.shape)
+    if train_loss.ndim > 1:
+        num_y = train_loss.shape[-1]
+        train_loss = f['train_loss'][:, num_y//2]
+        train_acc = f['train_loss'][:, num_y//2]
 
     print("train_loss")
     print(train_loss)
@@ -40,6 +43,10 @@ def plot_1d_loss_err(surf_file, xmin=-1.0, xmax=1.0, loss_max=5, log=False, show
     if 'test_loss' in f.keys():
         test_loss = f['test_loss'][:]
         test_acc = f['test_acc'][:]
+        if test_loss.ndim > 1:
+            num_y = test_loss.shape[-1]
+            test_loss = f['test_loss'][:, num_y // 2]
+            test_acc = f['test_loss'][:, num_y // 2]
         if log:
             te_loss, = ax1.semilogy(x, test_loss, 'b--', label='Test loss', linewidth=1)
         else:
@@ -98,8 +105,16 @@ def plot_1d_loss_err_repeat(prefix, idx_min=1, idx_max=10, xmin=-1.0, xmax=1.0,
         x = f['xcoordinates'][:]
         train_loss = f['train_loss'][:]
         train_acc = f['train_acc'][:]
+        if train_loss.ndim > 1:
+            num_y = train_loss.shape[-1]
+            train_loss = f['train_loss'][:, num_y // 2]
+            train_acc = f['train_loss'][:, num_y // 2]
         test_loss = f['test_loss'][:]
         test_acc = f['test_acc'][:]
+        if test_loss.ndim > 1:
+            num_y = test_loss.shape[-1]
+            test_loss = f['test_loss'][:, num_y // 2]
+            test_acc = f['test_loss'][:, num_y // 2]
 
         xmin = xmin if xmin != -1.0 else min(x)
         xmax = xmax if xmax != 1.0 else max(x)
