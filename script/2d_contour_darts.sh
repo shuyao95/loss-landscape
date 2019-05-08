@@ -13,25 +13,21 @@ CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:51 --y=-1:1:51 --mo
 # darts v2 with cutout
 CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:51 --y=-1:1:51 --model darts_v2 \
 --model_file ../cnn/eval-DARTS_ONLY_CUTOUT-20190429-104935/weights.pt \
---cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 1024
+--cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 1024 --plot
 
 # darts v2 with cutout and auxiliary
 CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:51 --y=-1:1:51 --model darts_v2 \
 --model_file ../cnn/eval-DARTS_NO_DROP_PATH-20190429-104935/weights.pt \
---cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 1024 --auxiliary
+--cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 1024 --auxiliary --plot
 
 # darts v2 with cutout, auxiliary and drop path
 CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:51 --y=-1:1:51 --model darts_v2 \
 --model_file ../cnn/eval-DARTS-20190507-101323/weights.pt \
 --cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 1024 --auxiliary
 
-GPU_ID = 1
+GPU_ID=1
 # darts ops with cutout, auxiliary and drop path
 CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:51 --y=-1:1:51 --model darts_ops1 \
---model_file ../cnn/eval-DARTS_OPS_01-20190410-171722/weights.pt \
---cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 1024 --auxiliary
-
-CUDA_VISIBLE_DEVICES=1 python plot_surface.py --x=-1:1:51 --y=-1:1:51 --model darts_ops1 \
 --model_file ../cnn/eval-DARTS_OPS_01-20190410-171722/weights.pt \
 --cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 1024 --auxiliary
 
@@ -51,7 +47,7 @@ CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:51 --y=-1:1:51 --mo
 --model_file ../cnn/eval-DARTS_OPS_05-20190416-013321/weights.pt \
 --cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 1024 --auxiliary
 
-GPU_ID = 0
+GPU_ID=0
 # darts conn with cutout, auxiliary and drop path
 CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:51 --y=-1:1:51 --model darts_conn1 \
 --model_file ../cnn/eval-DARTS_CONN_01-20190417-103208/weights.pt \
@@ -70,6 +66,7 @@ CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:51 --y=-1:1:51 --mo
 --cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 1024 --auxiliary
 
 
+GPU_ID=1
 # darts ops without cutout, auxiliary and drop path
 CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:51 --y=-1:1:51 --model darts_ops1 \
 --model_file ../cnn/eval-DARTS_OPS_01-20190425-104500/weights.pt \
@@ -91,6 +88,7 @@ CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:51 --y=-1:1:51 --mo
 --model_file ../cnn/eval-DARTS_OPS_05-20190502-113742/weights.pt \
 --cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 1024
 
+GPU_ID=0
 # darts conn without cutout, auxiliary and drop path
 CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:51 --y=-1:1:51 --model darts_conn1 \
 --model_file ../cnn/eval-DARTS_CONN_01-20190425-104744/weights.pt \
