@@ -1,6 +1,17 @@
 import torch
 from torch import nn
-from utils import drop_path
+from torch.autograd import Variable
+
+def drop_path(x, drop_prob, dims=(0,)):
+    var_size = [1 for _ in range(x.dim())]
+    for i in dims:
+        var_size[i] = x.size(i)
+    if drop_prob > 0.:
+        keep_prob = 1.-drop_prob
+        mask = Variable(torch.cuda.FloatTensor(*var_size).bernoulli_(keep_prob))
+        x.div_(keep_prob)
+        x.mul_(mask)
+    return x
 
 class SepConv(nn.Module):
 
@@ -177,7 +188,7 @@ class NetworkCIFAR(nn.Module):
 			inputs.append(s)
 
 		for i, cell in enumerate(self.cells):
-			out = cell(inputs[:self._prev_connects], self.drop_path_prob)
+			out = cell(inputs[:self._prev_connects], drop_prob = 0)
 			inputs.insert(0, out)
 			if i == 2 * self._layers // 3:
 				if self._auxiliary and self.training:
