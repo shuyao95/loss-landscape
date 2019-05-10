@@ -224,12 +224,10 @@ class NetworkCIFAR(nn.Module):
 		for i, cell in enumerate(self.cells):
 			out = cell(inputs[:self._prev_connects], drop_prob=0)
 			inputs.insert(0, out)
-			if i == 2 * self._layers // 3:
-				if self._auxiliary and self.training:
-					logits_aux = self.auxiliary_head(out)
+			del inputs[-1]
 		out = self.global_pooling(out)
 		logits = self.classifier(out.view(out.size(0), -1))
-		return logits, logits_aux
+		return logits
 
 def dd_node1():
 	return NetworkCIFAR(C=36, nodes=1, num_classes=10, layers=20, auxiliary=False, \
