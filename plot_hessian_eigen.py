@@ -145,6 +145,8 @@ if __name__ == '__main__':
     parser.add_argument('--ynorm', default='', help='direction normalization: filter | layer | weight')
     parser.add_argument('--xignore', default='', help='ignore bias and BN parameters: biasbn')
     parser.add_argument('--yignore', default='', help='ignore bias and BN parameters: biasbn')
+    parser.add_argument('--same_dir', action='store_true', default=False,
+                        help='use the same random direction for both x-axis and y-axis')
     parser.add_argument('--idx', default=0, type=int, help='the index for the repeatness experiment')
     parser.add_argument('--surf_file', default='', help='customize the name of surface file, could be an existing file.')
 
