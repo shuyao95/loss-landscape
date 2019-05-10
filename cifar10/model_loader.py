@@ -5,6 +5,10 @@ import cifar10.models.resnet as resnet
 import cifar10.models.densenet as densenet
 
 import cifar10.models.darts as darts
+import cifar10.models.dd_add as dd_add
+import cifar10.models.dd_concat as dd_concat
+import cifar10.models.dd_nogroup as dd_nogroup
+import cifar10.models.dd_seq as dd_seq
 
 # map between model name and function
 models = {
@@ -52,6 +56,18 @@ models = {
     'darts_conn2'            : darts.darts_conn2,
     'darts_conn3'            : darts.darts_conn3,
     'darts_conn4'            : darts.darts_conn4,
+    'darts_nogroup'         : dd_nogroup.dd_nogroup,
+    'darts_seq'             : dd_seq.dd_seq,
+    'darts_add'             : dd_add.dd_add,
+    'darts_node1'           : dd_concat.dd_node1,
+    'darts_node2'           : dd_concat.dd_node2,
+    'darts_node3'           : dd_concat.dd_node3,
+    'darts_node4'           : dd_concat.dd_node4,
+    'darts_node5'           : dd_concat.dd_node5,
+    'darts_prev1'           : dd_concat.dd_prev1,
+    'darts_prev2'           : dd_concat.dd_prev2,
+    'darts_prev3'           : dd_concat.dd_prev3,
+    'darts_prev4'           : dd_concat.dd_prev4,
 }
 
 def load(model_name, model_file=None, data_parallel=False, auxiliary=False):
