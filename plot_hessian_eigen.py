@@ -236,7 +236,8 @@ if __name__ == '__main__':
     #--------------------------------------------------------------------------
     # Start the computation
     #--------------------------------------------------------------------------
-    crunch_hessian_eigs(surf_file, net, w, s, d, trainloader, comm, rank, args)
+    # crunch_hessian_eigs(surf_file, net, w, s, d, trainloader, comm, rank, args)
+    crunch_hessian_eigs(surf_file, net, w, s, d, testloader, comm, rank, args)
     print ("Rank " + str(rank) + ' is done!')
 
     #--------------------------------------------------------------------------

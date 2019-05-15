@@ -10,6 +10,9 @@ CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:51 --y=-1:1:51 --mo
 --model_file ../cnn/eval-DARTS_NO-REG-20190425-104947/weights.pt \
 --cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 1024
 
+CUDA_VISIBLE_DEVICES=5 python train_dd.py --batch_size 60 --drop_path_prob 0 --arch concat --save DARTS_DENSE_CONCAT_NODE-4 --seed 0 --nodes 4 --init_channels 24
+CUDA_VISIBLE_DEVICES=5 python train_dd.py --batch_size 60 --drop_path_prob 0 --arch concat --save TEST --seed 0 --nodes 4 --init_channels 24
+
 # darts v2 with cutout
 CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:51 --y=-1:1:51 --model darts_v2 \
 --model_file ../cnn/eval-DARTS_ONLY_CUTOUT-20190429-104935/weights.pt \
