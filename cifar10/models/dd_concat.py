@@ -208,7 +208,7 @@ class NetworkCIFAR(nn.Module):
             inputs.append(s)
 
         for i, cell in enumerate(self.cells):
-            out = cell(inputs[:self._prev_connects], self.drop_path_prob)
+            out = cell(inputs[:self._prev_connects], drop_prob=0)
             inputs.insert(0, out)
             del inputs[-1]
         out = self.global_pooling(out)
