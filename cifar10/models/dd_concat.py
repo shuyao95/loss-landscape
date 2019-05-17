@@ -1,6 +1,19 @@
 import torch
 from torch import nn
-from utils import drop_path
+from torch.autograd import Variable
+
+
+def drop_path(x, drop_prob, dims=(0,)):
+    var_size = [1 for _ in range(x.dim())]
+    for i in dims:
+        var_size[i] = x.size(i)
+    if drop_prob > 0.:
+        keep_prob = 1.-drop_prob
+        mask = Variable(torch.cuda.FloatTensor(
+            *var_size).bernoulli_(keep_prob))
+        x.div_(keep_prob)
+        x.mul_(mask)
+    return x
 
 # the training speed should be able to boost for grouped sepconv
 
