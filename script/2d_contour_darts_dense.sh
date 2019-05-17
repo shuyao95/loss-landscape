@@ -6,10 +6,10 @@ CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:51 --y=-1:1:51 --mo
 --model_file ../cnn/eval-DARTS_DENSE_NOGROUP-20190506-210531/weights.pt \
 --cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 2048 --plot
 
-CUDA_VISIBLE_DEVICES=0 python plot_hessian_eigen.py --x=-1:1:51 --model darts_enas \
---model_file ../cnn/eval-ENAS_NO_REG-20190507-151659/weights.pt \
---cuda --dir_type weights --xignore biasbn --xnorm filter --batch_size 32 --plot \
---surf_file ../cnn/eval-ENAS_NO_REG-20190507-151659/hessian.pt
+CUDA_VISIBLE_DEVICES=1 python plot_hessian_eigen.py --x=-1:1:21 --model darts_conn1 \
+--model_file ../cnn/eval-DARTS_CONN_01-20190425-104744/weights.pt \
+--cuda --dir_type weights --xignore biasbn --xnorm filter --batch_size 40 --plot \
+--surf_file ../cnn/eval-DARTS_CONN_01-20190425-104744/hessian.pt
 
 CUDA_VISIBLE_DEVICES=0 python plot_surface.py --x=-1:1:51 --y=-1:1:51 --model darts_enas \
 --model_file ../cnn/eval-ENAS_NO_REG-20190507-151659/weights.pt \
