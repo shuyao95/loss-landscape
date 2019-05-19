@@ -221,6 +221,16 @@ def dd_node1():
                         prev_connects=2)
 
 
+def dd_node1_c46():
+    return NetworkCIFAR(C=46, nodes=1, num_classes=10, layers=20, auxiliary=False,
+                        prev_connects=2)
+
+
+def dd_node1_c36():
+    return NetworkCIFAR(C=36, nodes=1, num_classes=10, layers=20, auxiliary=False,
+                        prev_connects=2)
+
+
 def dd_node2():
     return NetworkCIFAR(C=46, nodes=2, num_classes=10, layers=20, auxiliary=False,
                         prev_connects=2)

@@ -8,8 +8,7 @@ OPS = {
 	'avg_pool_3x3': lambda C, stride, affine: nn.AvgPool2d(3, stride=stride, padding=1,
 	                                                       count_include_pad=False),
 	'max_pool_3x3': lambda C, stride, affine: nn.MaxPool2d(3, stride=stride, padding=1),
-	'skip_connect': lambda C, stride, affine: Identity() if stride == 1 else FactorizedReduce(C, C,
-	                                                                                          affine=affine),
+	'skip_connect': lambda C, stride, affine: Identity() if stride == 1 else FactorizedReduce(C, C, affine=affine),
 	'sep_conv_3x3': lambda C, stride, affine: SepConv(C, C, 3, stride, 1, affine=affine),
 	'sep_conv_5x5': lambda C, stride, affine: SepConv(C, C, 5, stride, 2, affine=affine),
 	'sep_conv_7x7': lambda C, stride, affine: SepConv(C, C, 7, stride, 3, affine=affine),
@@ -259,6 +258,12 @@ NASNet = Genotype(
 	reduce_concat=[4, 5, 6],
 )
 
+NASNet_CONN1 = Genotype(normal=[('sep_conv_5x5', 1), ('sep_conv_3x3', 0), ('sep_conv_5x5', 1), ('sep_conv_3x3', 0), ('avg_pool_3x3', 1), ('skip_connect', 3), ('avg_pool_3x3', 4), ('avg_pool_3x3', 2), ('sep_conv_3x3', 5), ('skip_connect', 4)], normal_concat=[
+         2, 3, 4, 5, 6], reduce=[('sep_conv_5x5', 1), ('sep_conv_7x7', 0), ('max_pool_3x3', 1), ('sep_conv_7x7', 0), ('avg_pool_3x3', 0), ('sep_conv_5x5', 1), ('skip_connect', 1), ('avg_pool_3x3', 4), ('sep_conv_3x3', 2), ('max_pool_3x3', 3)], reduce_concat=[4, 5, 6])
+
+NASNet_CONN2 = Genotype(normal=[('sep_conv_5x5', 0), ('sep_conv_3x3', 1), ('sep_conv_5x5', 2), ('sep_conv_3x3', 0), ('avg_pool_3x3', 1), ('skip_connect', 3), ('avg_pool_3x3', 2), ('avg_pool_3x3', 4), ('sep_conv_3x3', 5), ('skip_connect', 4)], normal_concat=[
+                        2, 3, 4, 5, 6], reduce=[('sep_conv_5x5', 1), ('sep_conv_7x7', 0), ('max_pool_3x3', 2), ('sep_conv_7x7', 2), ('avg_pool_3x3', 3), ('sep_conv_5x5', 1), ('skip_connect', 4), ('avg_pool_3x3', 4), ('sep_conv_3x3', 3), ('max_pool_3x3', 2)], reduce_concat=[4, 5, 6])
+
 AmoebaNet = Genotype(
 	normal=[('avg_pool_3x3', 0), ('max_pool_3x3', 1), ('sep_conv_3x3', 0), ('sep_conv_5x5', 2),
 	        ('sep_conv_3x3', 0), ('avg_pool_3x3', 3), ('sep_conv_3x3', 1), ('skip_connect', 1),
@@ -272,6 +277,12 @@ AmoebaNet = Genotype(
 	reduce_concat=[3, 4, 6]
 )
 
+AmoebaNet_CONN1 = Genotype(normal=[('avg_pool_3x3', 1), ('max_pool_3x3', 0), ('sep_conv_3x3', 1), ('sep_conv_5x5', 0), ('sep_conv_3x3', 1), ('avg_pool_3x3', 3), ('sep_conv_3x3', 4), ('skip_connect', 2), ('skip_connect', 5), ('avg_pool_3x3', 4)], normal_concat=[
+         4, 5, 6], reduce=[('avg_pool_3x3', 1), ('sep_conv_3x3', 0), ('max_pool_3x3', 1), ('sep_conv_7x7', 0), ('sep_conv_7x7', 0), ('avg_pool_3x3', 1), ('max_pool_3x3', 1), ('max_pool_3x3', 4), ('conv_7x1_1x7', 2), ('sep_conv_3x3', 3)], reduce_concat=[3, 4, 6])
+
+AmoebaNet_CONN2 = Genotype(normal=[('avg_pool_3x3', 0), ('max_pool_3x3', 1), ('sep_conv_3x3', 2), ('sep_conv_5x5', 0), ('sep_conv_3x3', 1), ('avg_pool_3x3', 3), ('sep_conv_3x3', 2), ('skip_connect', 4), ('skip_connect', 5), ('avg_pool_3x3', 4)], normal_concat=[
+                           4, 5, 6], reduce=[('avg_pool_3x3', 1), ('sep_conv_3x3', 0), ('max_pool_3x3', 2), ('sep_conv_7x7', 2), ('sep_conv_7x7', 3), ('avg_pool_3x3', 1), ('max_pool_3x3', 4), ('max_pool_3x3', 4), ('conv_7x1_1x7', 3), ('sep_conv_3x3', 2)], reduce_concat=[3, 4, 6])
+
 SNAS_MILD = Genotype(
 	normal=[('sep_conv_3x3', 0), ('sep_conv_3x3', 1), ('skip_connect', 0), ('dil_conv_3x3', 1),
 	        ('skip_connect', 0), ('skip_connect', 1), ('skip_connect', 0), ('sep_conv_3x3', 1)],
@@ -279,6 +290,9 @@ SNAS_MILD = Genotype(
 	reduce=[('max_pool_3x3', 0), ('max_pool_3x3', 1), ('skip_connect', 2), ('max_pool_3x3', 1),
 	        ('max_pool_3x3', 1), ('skip_connect', 2), ('dil_conv_5x5', 2), ('max_pool_3x3', 0)],
 	reduce_concat=[2, 3, 4, 5])
+
+SNAS_CONN1 = Genotype(normal=[('sep_conv_3x3', 1), ('sep_conv_3x3', 0), ('skip_connect', 1), ('dil_conv_3x3', 0), ('skip_connect', 1), ('skip_connect', 3), ('skip_connect', 4), ('sep_conv_3x3', 2)], normal_concat=[
+                      2, 3, 4, 5], reduce=[('max_pool_3x3', 1), ('max_pool_3x3', 0), ('skip_connect', 1), ('max_pool_3x3', 0), ('max_pool_3x3', 0), ('skip_connect', 1), ('dil_conv_5x5', 1), ('max_pool_3x3', 4)], reduce_concat=[2, 3, 4, 5])
 
 ENAS = Genotype(
 	normal=[('sep_conv_3x3', 1), ('skip_connect', 1), ('sep_conv_5x5', 1), ('skip_connect', 0),
@@ -289,6 +303,14 @@ ENAS = Genotype(
 	        ('sep_conv_3x3', 1), ('avg_pool_3x3', 1), ('sep_conv_5x5', 4), ('avg_pool_3x3', 1),
 	        ('sep_conv_3x3', 5), ('sep_conv_5x5', 0)],
 	reduce_concat=[2, 3, 6])
+
+ENAS_CONN1 = Genotype(normal=[('sep_conv_3x3', 1), ('skip_connect', 0), ('sep_conv_5x5', 1), ('skip_connect', 0), ('avg_pool_3x3', 1), ('sep_conv_3x3', 3), ('sep_conv_3x3', 4), ('avg_pool_3x3', 2), ('sep_conv_5x5', 5), ('avg_pool_3x3', 4)], normal_concat=[
+                      2, 3, 4, 5, 6], reduce=[('sep_conv_5x5', 1), ('avg_pool_3x3', 0), ('sep_conv_3x3', 1), ('avg_pool_3x3', 0), ('sep_conv_3x3', 0), ('avg_pool_3x3', 1), ('sep_conv_5x5', 1), ('avg_pool_3x3', 4), ('sep_conv_3x3', 2), ('sep_conv_5x5', 3)], reduce_concat=[2, 3, 6])
+
+ENAS_CONN2 = Genotype(normal=[('sep_conv_3x3', 0), ('skip_connect', 1), ('sep_conv_5x5', 2), ('skip_connect', 0), ('avg_pool_3x3', 1), ('sep_conv_3x3', 3), ('sep_conv_3x3', 2), ('avg_pool_3x3', 4), ('sep_conv_5x5', 5), ('avg_pool_3x3', 4)], normal_concat=[
+                      2, 3, 4, 5, 6], reduce=[('sep_conv_5x5', 1), ('avg_pool_3x3', 0), ('sep_conv_3x3', 2), ('avg_pool_3x3', 2), ('sep_conv_3x3', 3), ('avg_pool_3x3', 1), ('sep_conv_5x5', 4), ('avg_pool_3x3', 4), ('sep_conv_3x3', 3), ('sep_conv_5x5', 2)], reduce_concat=[2, 3, 6])
+
+
 
 DARTS_V1 = Genotype(
 	normal=[('sep_conv_3x3', 1), ('sep_conv_3x3', 0), ('skip_connect', 0), ('sep_conv_3x3', 1),
@@ -382,14 +404,55 @@ def darts_v1(auxiliary):
 def darts_nasnet(auxiliary):
 	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=NASNet)
 
+def darts_nasnet_conn1(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=NASNet_CONN1)
+
+def darts_nasnet_conn2(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=NASNet_CONN2)
+
+def darts_nasnet_conn3(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=NASNet_CONN3)
+
+def darts_nasnet_conn4(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=NASNet_CONN4)
+
 def darts_amoebanet(auxiliary):
 	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=AmoebaNet)
+
+def darts_amoebanet_conn1(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=AmoebaNet_CONN1)
+
+def darts_amoebanet_conn2(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=AmoebaNet_CONN2)
+
+def darts_amoebanet_conn3(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=AmoebaNet_CONN3)
+
+def darts_amoebanet_conn4(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=AmoebaNet_CONN4)
 
 def darts_enas(auxiliary):
 	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=ENAS)
 
+def darts_enas_conn1(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=ENAS_CONN1)
+def darts_enas_conn2(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=ENAS_CONN2)
+def darts_enas_conn3(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=ENAS_CONN3)
+def darts_enas_conn4(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=ENAS_CONN4)
+
 def darts_snas(auxiliary):
 	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=SNAS_MILD)
+def darts_snas_conn1(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=SNAS_CONN1)
+def darts_snas_conn2(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=SNAS_CONN2)
+def darts_snas_conn3(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=SNAS_CONN3)
+def darts_snas_conn4(auxiliary):
+	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=SNAS_CONN4)
 
 def darts_ops1(auxiliary):
 	return NetworkCIFAR(C=36, num_classes=10, layers=20, auxiliary=auxiliary, genotype=DARTS_OPS1)
