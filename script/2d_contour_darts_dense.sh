@@ -39,6 +39,14 @@ CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:41 --y=-1:1:41 --mo
 --model_file ../cnn/eval-DARTS_NODE1-20190515-220737/weights.pt \
 --cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 2048 --plot
 
+CUDA_VISIBLE_DEVICES=0 python plot_surface.py --x=-1:1:41 --y=-1:1:41 --model dd_node1_c46 \
+--model_file ../cnn/eval-DARTS_NODE1_C46-20190518-113017/weights.pt \
+--cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 1548 &
+
+CUDA_VISIBLE_DEVICES=1 python plot_surface.py --x=-1:1:41 --y=-1:1:41 --model dd_node1_c36 \
+--model_file ../cnn/eval-DARTS_NODE1_C36-20190518-113017/weights.pt \
+--cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 2048
+
 GPU_ID=4
 CUDA_VISIBLE_DEVICES=$GPU_ID python plot_surface.py --x=-1:1:41 --y=-1:1:41 --model dd_node1 \
 --model_file ../cnn/eval-DARTS_NODE1-20190515-220737/weights.pt \
