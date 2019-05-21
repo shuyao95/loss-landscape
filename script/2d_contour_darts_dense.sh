@@ -31,6 +31,24 @@ CUDA_VISIBLE_DEVICES=0 python plot_surface.py --x=-1:1:51 --y=-1:1:51 --model da
 
 #########################################################################
 
+CUDA_VISIBLE_DEVICES=1 python plot_surface.py --x=-1:1:41 --y=-1:1:41 --model darts_amoebanet_conn1 \
+--model_file ../cnn/eval-AmoebaNet_CONN1-20190515-223839/weights.pt \
+--cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 2048
+
+CUDA_VISIBLE_DEVICES=1 python plot_surface.py --x=-1:1:41 --y=-1:1:41 --model darts_amoebanet_conn2 \
+--model_file ../cnn/eval-AmoebaNet_CONN2-20190517-031723/weights.pt \
+--cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 2048
+
+CUDA_VISIBLE_DEVICES=1 python plot_surface.py --x=-1:1:41 --y=-1:1:41 --model darts_amoebanet_conn3 \
+--model_file ../cnn/eval-AmoebaNet_CONN3-20190518-074212/weights.pt \
+--cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 2048
+
+CUDA_VISIBLE_DEVICES=1 python plot_surface.py --x=-1:1:41 --y=-1:1:41 --model darts_amoebanet_conn4 \
+--model_file ../cnn/eval-AmoebaNet_CONN4-20190519-053000/weights.pt \
+--cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter --batch_size 2048
+
+#########################################################################
+
 CUDA_VISIBLE_DEVICES=0 python plot_surface.py --x=-1:1:11 --model darts_conn1 \
 --model_file ~/Downloads/eval-DARTS_CONN_01-20190425-104744//weights.pt \
 --dir_type weights --xignore biasbn --xnorm filter --batch_size 1024 --plot
