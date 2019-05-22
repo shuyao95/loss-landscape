@@ -87,6 +87,11 @@ models = {
     'dd_prev2': dd_concat.dd_prev2,
     'dd_prev3': dd_concat.dd_prev3,
     'dd_prev4': dd_concat.dd_prev4,
+    'darts_nasnet_imp': darts.nasnet_imp,
+    'darts_amoebanet_imp': darts.amoebanet_imp,
+    'darts_enas_imp': darts.enas_imp,
+    'darts_snas_imp': darts.snas_imp,
+    'darts_imp': darts.darts_imp,
 }
 
 
